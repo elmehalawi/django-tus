@@ -74,7 +74,7 @@ class TusUpload(View):
 
         return TusResponse(
             status=201,
-            extra_headers={'Location': f'https://{host_name}/graphql_api/schedule_upload/{tus_file.resource_id}/'},
+            extra_headers={'Location': f'https://{host_name}/graphql_api/schedule_upload/{tus_file.resource_id}'},
         )
 
     def head(self, request, resource_id):
