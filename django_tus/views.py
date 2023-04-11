@@ -11,6 +11,8 @@ from django_tus.signals import tus_upload_finished_signal
 from django_tus.tusfile import TusFile, TusChunk, FilenameGenerator
 from pathvalidate import is_valid_filename
 
+from avtain_backend.settings import host_name
+
 logger = logging.getLogger(__name__)
 
 TUS_SETTINGS = {}
@@ -72,7 +74,7 @@ class TusUpload(View):
 
         return TusResponse(
             status=201,
-            extra_headers={'Location': f'https://{settings.host_name}/{tus_file.resource_id}'},
+            extra_headers={'Location': f'https://{host_name}/{tus_file.resource_id}'},
         )
 
     def head(self, request, resource_id):
