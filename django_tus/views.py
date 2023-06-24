@@ -11,7 +11,7 @@ from django_tus.signals import tus_upload_finished_signal
 from django_tus.tusfile import TusFile, TusChunk, FilenameGenerator
 from pathvalidate import is_valid_filename
 
-from avtain_backend.settings import host_name
+from avtain_backend.settings import host_name, DEBUG
 
 logger = logging.getLogger(__name__)
 
@@ -72,9 +72,11 @@ class TusUpload(View):
 
         tus_file = TusFile.create_initial_file(metadata, file_size)
 
+        protocol = 'http' if DEBUG else 'https'
+
         return TusResponse(
             status=201,
-            extra_headers={'Location': f'https://{host_name}/backchannel/schedule_upload/{tus_file.resource_id}'},
+            extra_headers={'Location': f'{protocol}://{host_name}/backchannel/schedule_upload/{tus_file.resource_id}'},
         )
 
     def head(self, request, resource_id):
