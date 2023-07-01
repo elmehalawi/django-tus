@@ -76,7 +76,7 @@ class TusUpload(View):
 
         return TusResponse(
             status=201,
-            extra_headers={'Location': f'{protocol}://{host_name}/backchannel/schedule_upload/{tus_file.resource_id}'},
+            extra_headers={'Location': f'{protocol}://{host_name}/backchannel/upload/{tus_file.resource_id}'},
         )
 
     def head(self, request, resource_id):
